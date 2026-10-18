@@ -6,39 +6,59 @@
 <title>Denny</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
+  * { box-sizing: border-box; }
   body {
     margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, system-ui, sans-serif;
+    background: radial-gradient(circle at top, #1f2937, #0b0f17 70%);
+    color: #fff;
     padding: 24px;
-    font-family: -apple-system, sans-serif;
-    background: var(--tg-theme-bg-color, #fff);
-    color: var(--tg-theme-text-color, #000);
+  }
+  .card {
+    max-width: 380px;
+    width: 100%;
     text-align: center;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 36px 28px;
+    backdrop-filter: blur(8px);
   }
-  h2 { margin-top: 40px; }
+  .emoji { font-size: 48px; margin-bottom: 8px; }
+  h1 {
+    font-size: 22px;
+    margin: 8px 0 4px;
+    background: linear-gradient(90deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  p {
+    color: #9ca3af;
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 12px 0 28px;
+  }
   button {
-    margin-top: 24px;
-    padding: 14px 28px;
+    width: 100%;
+    padding: 16px;
     font-size: 16px;
+    font-weight: 600;
     border: none;
-    border-radius: 12px;
-    background: var(--tg-theme-button-color, #2ea6ff);
-    color: var(--tg-theme-button-text-color, #fff);
+    border-radius: 14px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(59,130,246,0.35);
   }
+  button:active { transform: scale(0.97); }
 </style>
 </head>
 <body>
-  <h2>Denny delete messages</h2>
-  <p>Нажми «Подключить», и я пришлю тебе инструкцию в чат.</p>
-  <button onclick="connect()">✅ Подключить</button>
-
-<script>
-  const tg = window.Telegram.WebApp;
-  tg.ready();
-  tg.expand();
-
-  function connect() {
-    tg.sendData("connect");
-  }
-</script>
-</body>
-</html>
+  <div class="card">
+    <div class="emoji">🔒</div>
+    <h1>Denny delete messages</h1>
+    <p>Слежу за удалёнными и изменёнными сообще
