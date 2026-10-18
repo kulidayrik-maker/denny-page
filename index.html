@@ -129,6 +129,7 @@
     color: var(--muted);
     font-size: 14px;
     margin: 0 0 18px;
+    line-height: 1.5;
   }
   button {
     width: 100%;
@@ -152,7 +153,8 @@
   }
 
   .done .emoji { font-size: 48px; }
-  .done h1 { font-size: 20px; }
+  .done h1 { font-size: 20px; margin-bottom: 10px; }
+  .done b { color: #fff; }
 </style>
 </head>
 <body>
@@ -198,7 +200,7 @@
     </div>
 
     <div class="cta" id="cta">
-      <p>Нажми «Подключить», и бот начнёт следить за твоими чатами.</p>
+      <p>Нажми «Подключить», и я покажу, куда дальше нажимать в настройках Telegram.</p>
       <button onclick="connect()">✅ Подключить</button>
     </div>
 
@@ -209,11 +211,15 @@
   function connect() {
     if (window.Telegram && window.Telegram.WebApp) {
       window.Telegram.WebApp.sendData("connect");
-    } else {
-      document.getElementById("cta").innerHTML =
-        "<div class='done'><span class='emoji'>✅</span><h1>Готово</h1><p>Можешь вернуться в чат с ботом.</p></div>";
     }
+    document.getElementById("cta").innerHTML =
+      "<div class='done'><span class='emoji'>⚙️</span><h1>Открой настройки</h1>" +
+      "<p>Сейчас откроются настройки Telegram. Дальше:<br>" +
+      "1. Зайди в <b>Telegram для бизнеса</b><br>" +
+      "2. Открой <b>Чат-боты</b><br>" +
+      "3. Впиши <b>@dennydeletemessages</b> и добавь бота</p>" +
+      "<button onclick=\"window.location.href='tg://settings'\">Открыть настройки</button></div>";
   }
 </script>
 </body>
- </html>
+</html>
