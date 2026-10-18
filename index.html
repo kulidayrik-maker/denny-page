@@ -7,41 +7,128 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
   * { box-sizing: border-box; }
+
+  :root {
+    --bg1: #0b0f17;
+    --bg2: #1f2937;
+    --accent1: #3b82f6;
+    --accent2: #8b5cf6;
+    --text: #f3f4f6;
+    --muted: #9ca3af;
+  }
+
   body {
     margin: 0;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-family: -apple-system, system-ui, sans-serif;
-    background: radial-gradient(circle at top, #1f2937, #0b0f17 70%);
-    color: #fff;
-    padding: 24px;
+    color: var(--text);
+    background: var(--bg1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 20px 48px;
+    position: relative;
+    overflow-x: hidden;
   }
-  .card {
-    max-width: 380px;
+
+  .glow {
+    position: fixed;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.35;
+    z-index: 0;
+    animation: float 10s ease-in-out infinite alternate;
+  }
+  .glow1 { background: var(--accent1); top: -120px; left: -120px; }
+  .glow2 { background: var(--accent2); bottom: -140px; right: -100px; animation-delay: 2s; }
+
+  @keyframes float {
+    from { transform: translate(0, 0); }
+    to   { transform: translate(30px, 30px); }
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
     width: 100%;
-    text-align: center;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 20px;
-    padding: 36px 28px;
-    backdrop-filter: blur(8px);
+    max-width: 420px;
   }
-  .emoji { font-size: 48px; margin-bottom: 8px; }
-  h1 {
-    font-size: 22px;
-    margin: 8px 0 4px;
-    background: linear-gradient(90deg, #60a5fa, #a78bfa);
+
+  .hero {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .hero .emoji {
+    font-size: 56px;
+    margin-bottom: 10px;
+    display: block;
+    animation: pop 0.6s ease;
+  }
+  @keyframes pop {
+    0% { transform: scale(0.6); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .hero h1 {
+    font-size: 24px;
+    margin: 0 0 8px;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
-  p {
-    color: #9ca3af;
+  .hero p {
+    color: var(--muted);
     font-size: 15px;
-    line-height: 1.5;
-    margin: 12px 0 28px;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .features {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 28px 0;
+  }
+  .feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 14px 16px;
+  }
+  .feature .icon {
+    font-size: 22px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .feature .text b {
+    display: block;
+    font-size: 14.5px;
+    margin-bottom: 2px;
+  }
+  .feature .text span {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .cta {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 28px 22px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+  }
+  .cta p {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 18px;
   }
   button {
     width: 100%;
@@ -50,15 +137,83 @@
     font-weight: 600;
     border: none;
     border-radius: 14px;
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
     color: #fff;
     box-shadow: 0 6px 18px rgba(59,130,246,0.35);
   }
   button:active { transform: scale(0.97); }
+
+  .footnote {
+    text-align: center;
+    color: #6b7280;
+    font-size: 12px;
+    margin-top: 22px;
+    line-height: 1.5;
+  }
+
+  .done .emoji { font-size: 48px; }
+  .done h1 { font-size: 20px; }
 </style>
 </head>
 <body>
-  <div class="card">
-    <div class="emoji">🔒</div>
-    <h1>Denny delete messages</h1>
-    <p>Слежу за удалёнными и изменёнными сообще
+  <div class="glow glow1"></div>
+  <div class="glow glow2"></div>
+
+  <div class="content">
+    <div class="hero">
+      <span class="emoji">🔒</span>
+      <h1>Denny delete messages</h1>
+      <p>Слежу за твоей перепиской и присылаю в личку всё, что было удалено или изменено.</p>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <div class="icon">🗑</div>
+        <div class="text">
+          <b>Удалённые сообщения</b>
+          <span>Текст, фото, видео, голосовые, кружки и стикеры — присылаю сразу.</span>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="icon">✏️</div>
+        <div class="text">
+          <b>Правки</b>
+          <span>Показываю, что было написано до изменения и что стало.</span>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="icon">🔎</div>
+        <div class="text">
+          <b>Поиск по переписке</b>
+          <span>Команда /find находит нужное сообщение среди всего сохранённого.</span>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="icon">📝</div>
+        <div class="text">
+          <b>Пересказ за сутки</b>
+          <span>Команда /sum коротко напоминает, о чём говорили в чате.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta" id="cta">
+      <p>Нажми «Подключить», и бот начнёт следить за твоими чатами.</p>
+      <button onclick="connect()">✅ Подключить</button>
+    </div>
+
+    <div class="footnote">Работает только внутри Telegram для бизнеса.<br>Данные хранятся только у тебя на устройстве.</div>
+  </div>
+
+<script>
+  function connect() {
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.sendData("connect");
+    } else {
+      document.getElementById("cta").innerHTML =
+        "<div class='done'><span class='emoji'>✅</span><h1>Готово</h1><p>Можешь вернуться в чат с ботом.</p></div>";
+    }
+  }
+</script>
+</body>
+ </html>
