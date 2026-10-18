@@ -154,6 +154,7 @@
 
   .done .emoji { font-size: 48px; }
   .done h1 { font-size: 20px; margin-bottom: 10px; }
+  .done p { text-align: left; }
   .done b { color: #fff; }
 </style>
 </head>
@@ -213,12 +214,12 @@
       window.Telegram.WebApp.sendData("connect");
     }
     document.getElementById("cta").innerHTML =
-      "<div class='done'><span class='emoji'>⚙️</span><h1>Открой настройки</h1>" +
-      "<p>Сейчас откроются настройки Telegram. Дальше:<br>" +
-      "1. Зайди в <b>Telegram для бизнеса</b><br>" +
-      "2. Открой <b>Чат-боты</b><br>" +
-      "3. Впиши <b>@dennydeletemessages</b> и добавь бота</p>" +
-      "<button onclick=\"window.location.href='tg://settings'\">Открыть настройки</button></div>";
+      "<div class='done'><span class='emoji'>⚙️</span><h1>Подключение бота</h1>" +
+      "<p>Закрой это окно и в самом Telegram зайди:<br>" +
+      "1. <b>Настройки</b><br>" +
+      "2. <b>Telegram для бизнеса</b><br>" +
+      "3. <b>Чат-боты</b><br>" +
+      "4. Впиши <b>@dennydeletemessages</b> и добавь бота</p></div>";
   }
 </script>
 </body>
