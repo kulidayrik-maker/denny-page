@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Denny</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  body {
+    margin: 0;
+    padding: 24px;
+    font-family: -apple-system, sans-serif;
+    background: var(--tg-theme-bg-color, #fff);
+    color: var(--tg-theme-text-color, #000);
+    text-align: center;
+  }
+  h2 { margin-top: 40px; }
+  button {
+    margin-top: 24px;
+    padding: 14px 28px;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    background: var(--tg-theme-button-color, #2ea6ff);
+    color: var(--tg-theme-button-text-color, #fff);
+  }
+</style>
+</head>
+<body>
+  <h2>Denny delete messages</h2>
+  <p>Нажми «Подключить», и я пришлю тебе инструкцию в чат.</p>
+  <button onclick="connect()">✅ Подключить</button>
+
+<script>
+  const tg = window.Telegram.WebApp;
+  tg.ready();
+  tg.expand();
+
+  function connect() {
+    tg.sendData("connect");
+  }
+</script>
+</body>
+</html>
